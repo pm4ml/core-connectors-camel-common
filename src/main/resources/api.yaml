@@ -1,0 +1,25 @@
+openapi: 3.0.1
+info:
+  title: Helath API
+  description: API to check if application is up and running.
+  license:
+    name: Apache License Version 2.0, January 2004
+    url: http://www.apache.org/licenses/
+  version: 1.1.0
+
+
+paths:
+  /health:
+    get:
+      description: >
+        The HTTP request `GET /health` is used to check if application is up and running.
+      operationId: getHealth
+      tags:
+        - Health
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
