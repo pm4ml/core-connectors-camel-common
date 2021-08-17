@@ -1,11 +1,12 @@
 package com.modusbox.client.validator;
 
+import com.modusbox.client.customexception.AccountNumberFormatException;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 
 import java.util.regex.Pattern;
 
-public class AccountNumberValidator implements Processor {
+public class AccountNumberFormatValidator implements Processor {
 
     @Override
     public void process(Exchange exchange) throws Exception {
@@ -16,11 +17,11 @@ public class AccountNumberValidator implements Processor {
             String regex = exchange.getProperty("accountNumberFormat", "[0-9]+", String.class);
             Pattern pattern = Pattern.compile(regex);
             if(loanAccount == null || loanAccount.trim().isEmpty()) {
-                //throw exception
+                throw new AccountNumberFormatException("Account Number is null or empty");
             }
 
-            if(!pattern.matcher(regex).matches()) {
-                //throw
+            if(!pattern.matcher(loanAccount).matches()) {
+                throw new AccountNumberFormatException("Invalid Account Number Format");
             }
         }
     }
