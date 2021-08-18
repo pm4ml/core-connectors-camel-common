@@ -9,7 +9,7 @@ public enum ErrorCode {
     TIME_OUT(2004, 504, "Timeout has occurred."),
     INVALID_ACCESS_TOKEN(1001, 403, "Destination of the request failed to be reached."),
     DUPLICATE_REFERENCE_ID(3041, 400, "Duplicate reference ID."),
-    CC_LOGICAL_TRANSFORMATION_ERROR(2001, 501, "Generic unexpected exception."),
+    CC_LOGICAL_TRANSFORMATION_ERROR(2001, 500, "Generic unexpected exception."),
     ROUNDING_ISSUE(5200, 500, "Generic limit error."),
     GENERIC_DOWNSTREAM_ERROR_PAYEE(5000, 500, "Generic error due to the Payer or Payer FSP."),
     GENERIC_DOWNSTREAM_ERROR_PAYER(4000, 500, "Generic error related to the Payer or Payer FSP.");
