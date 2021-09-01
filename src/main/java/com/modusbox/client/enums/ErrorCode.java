@@ -11,7 +11,9 @@ public enum ErrorCode {
     INTERNAL_SERVER_ERROR(2001, 500, "Generic unexpected exception."),
     PAYEE_LIMIT_ERROR(5200, 500, "Generic limit error."),
     GENERIC_DOWNSTREAM_ERROR_PAYEE(5000, 500, "Generic error due to the Payer or Payer FSP."),
-    GENERIC_DOWNSTREAM_ERROR_PAYER(4000, 500, "Generic error related to the Payer or Payer FSP.");
+    GENERIC_DOWNSTREAM_ERROR_PAYER(4000, 500, "Generic error related to the Payer or Payer FSP."),
+    PHONE_NUMBER_MISMATCH(3241, 500, "There was an error with your account number and phone number combination. Please contact your DFSP to verify the numbers.");
+
 
     private final Integer statusCode;
     private final Integer httpResponseCode;
@@ -47,7 +49,7 @@ public enum ErrorCode {
                 "\"errorCode\": " + ec.getHttpResponseCode() + ", " +
                 "\"errorInformation\": {" +
                 "\"statusCode\": " + ec.getStatusCode() + ", " +
-                "\"description\": \""+ message + "\"}}";
+                "\"description\": \""+ message + "\";4bb}}";
 
     }
 
