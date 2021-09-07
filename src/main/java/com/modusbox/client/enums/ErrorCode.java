@@ -49,7 +49,7 @@ public enum ErrorCode {
                 "\"errorCode\": " + ec.getHttpResponseCode() + ", " +
                 "\"errorInformation\": {" +
                 "\"statusCode\": " + ec.getStatusCode() + ", " +
-                "\"description\": \""+ message + "\";4bb}}";
+                "\"description\": \""+ message + "\"}}";
 
     }
 
