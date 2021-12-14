@@ -6,7 +6,7 @@
 
     <groupId>com.modus.pm4ml.core.connectors.common</groupId>
     <artifactId>core-connectors-camel-common</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.1.0-SNAPSHOT</version>
     <properties>
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -22,9 +22,9 @@
         <dependency>
             <groupId>com.modus.log4j2.layout</groupId>
             <artifactId>log4j2-json-layout</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>1.1.0-SNAPSHOT</version>
             <scope>system</scope>
-            <systemPath>${basedir}/lib/log4j2-json-layout-1.0.0-SNAPSHOT.jar</systemPath>
+            <systemPath>${basedir}/lib/log4j2-json-layout-1.1.0-SNAPSHOT.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.apache.camel</groupId>
