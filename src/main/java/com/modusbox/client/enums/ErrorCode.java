@@ -59,7 +59,7 @@ public enum ErrorCode {
 
     }
 
-    public static String getErrorResponse(String statusCode, String locale) {
+    public static String getMojaloopErrorResponseByStatusCode(String statusCode, String locale) {
 
         if (errorMessageJsonObject == null) {
             try {
