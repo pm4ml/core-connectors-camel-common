@@ -2,8 +2,9 @@ package com.modusbox.client.enums;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import java.io.FileReader;
-import java.net.URL;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public enum ErrorCode {
     GENERIC_ID_NOT_FOUND(3200, 500, "Generic ID error provided by the client."),
@@ -63,16 +64,17 @@ public enum ErrorCode {
 
         if (errorMessageJsonObject == null) {
             try {
-                URL urlObject = ErrorCode.class.getClassLoader().getResource("error_message_language.json");
-                System.out.println("File Path of Json Languagae File: " + urlObject.getFile());
+                InputStream inputStream = ErrorCode.class.getClassLoader().getResourceAsStream("error_message_language.json");
+                System.out.println("InputStream of Json Languagae File: " + inputStream.toString());
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferReader = new BufferedReader(inputStreamReader);
 
-                FileReader fileReader = new FileReader(urlObject.getFile());
                 JSONParser jsonParser = new JSONParser();
-                JSONObject parsedObject = (JSONObject) jsonParser.parse(fileReader);
+                JSONObject parsedObject = (JSONObject) jsonParser.parse(bufferReader);
 
                 errorMessageJsonObject = (JSONObject) parsedObject.get("language");
                 System.out.println("errorMessageJsonObject length in Locale Json File:" + errorMessageJsonObject.size());
-                fileReader.close();
+                bufferReader.close();
 
             } catch (Exception e) {
                 System.out.println("Exception in getting locale error message.");
