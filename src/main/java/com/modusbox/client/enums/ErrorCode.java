@@ -5,6 +5,7 @@ import org.json.simple.parser.JSONParser;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 
 public enum ErrorCode {
     GENERIC_ID_NOT_FOUND(3200, 500, "Generic ID error provided by the client."),
@@ -66,7 +67,7 @@ public enum ErrorCode {
             try {
                 InputStream inputStream = ErrorCode.class.getClassLoader().getResourceAsStream("error_message_language.json");
                 System.out.println("InputStream of Json Languagae File: " + inputStream.toString());
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
                 BufferedReader bufferReader = new BufferedReader(inputStreamReader);
 
                 JSONParser jsonParser = new JSONParser();
@@ -117,7 +118,6 @@ public enum ErrorCode {
                 }
             }
         }
-
         return "{" +   "\"errorInformation\": {" +
                 "\"statusCode\": " + strStatusCode + ", " +
                 "\"description\": \"" + endUserFriendlyMessage + "\", " +
