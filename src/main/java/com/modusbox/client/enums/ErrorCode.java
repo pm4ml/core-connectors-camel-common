@@ -8,18 +8,30 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
 public enum ErrorCode {
-    GENERIC_ID_NOT_FOUND(3200, 500, "Generic ID error provided by the client."),
-    PAYER_FSP_ID_NOT_FOUND(3202, 500, "Provided Payer FSP ID not found."),
-    MALFORMED_SYNTAX(3101, 400, "Format of the parameter is not valid."),
-    MISSING_MANDATORY_ELEMENT(3102, 400, "Mandatory element in the data model was missing."),
-    SERVER_TIMED_OUT(2004, 504, "Timeout has occurred."),
+    
+    COMMUNICATION_ERROR(1000, 500, "Generic communication error."),
     DESTINATION_COMMUNICATION_ERROR(1001, 403, "Destination of the request failed to be reached."),
-    DUPLICATE_REFERENCE_ID(3041, 400, "Duplicate reference ID."),
+    GENERIC_SERVER_ERROR(2000, 500, "Generic server error."),
     INTERNAL_SERVER_ERROR(2001, 500, "Generic unexpected exception."),
-    PAYEE_LIMIT_ERROR(5200, 500, "Generic limit error."),
-    GENERIC_DOWNSTREAM_ERROR_PAYEE(5000, 500, "Generic error due to the Payer or Payer FSP."),
+    NOT_IMPLEMENTED(2002, 501, "Not implemented."),
+    SERVICE_UNAVAILABLE(2003, 503, "Service currently unavailable."),
+    SERVER_TIMED_OUT(2004, 504, "Timeout has occurred."),
+    SERVER_BUSY(2005, 503, "Server is rejecting requests due to overloading. Try again later."),
+    GENERIC_CLIENT_ERROR(3000, 500, "Generic client error."),
+    UNACCEPTABLE_VERSION(3001, 406, "Unacceptable version requested."),
+    UNKNOWN_URI(3002, 400, "Unknown URI."),
+    DUPLICATE_REFERENCE_ID(3041, 400, "Duplicate reference ID."),    
+    GENERIC_VALIDATION_ERROR(3100, 400, "Generic validation error."),
+    MALFORMED_SYNTAX(3101, 400, "Format of the parameter is not valid."),
+    MISSING_MANDATORY_ELEMENT(3102, 400, "Mandatory element in the data model was missing."),    
+    GENERIC_ID_NOT_FOUND(3200, 500, "Generic ID error provided by the client."),
+    DESTINATION_FSP_ERROR(3201, 500, "Destination FSP does not exist or cannot be found."),
+    PAYER_FSP_ID_NOT_FOUND(3202, 500, "Provided Payer FSP ID not found."),
+    TRANSFER_ID_NOT_FOUND(3208, 404, "Provided Transfer ID not found."),
+    PHONE_NUMBER_MISMATCH(3241, 500, "There was an error with your account number and phone number combination. Please contact your DFSP to verify the numbers."),    
     GENERIC_DOWNSTREAM_ERROR_PAYER(4000, 500, "Generic error related to the Payer or Payer FSP."),
-    PHONE_NUMBER_MISMATCH(3241, 500, "There was an error with your account number and phone number combination. Please contact your DFSP to verify the numbers."),
+    GENERIC_DOWNSTREAM_ERROR_PAYEE(5000, 500, "Generic error due to the Payer or Payer FSP."),    
+    PAYEE_LIMIT_ERROR(5200, 500, "Generic limit error."),
     ROUNDING_VALUE_ERROR(5241, 500, "Amount is invalid. Please enter the amount that is divisible by XXXX.");
 
     private final Integer statusCode;
