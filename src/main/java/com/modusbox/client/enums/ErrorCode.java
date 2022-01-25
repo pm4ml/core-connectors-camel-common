@@ -40,6 +40,8 @@ public enum ErrorCode {
     public static JSONObject errorMessageJsonObject;
     public static String endUserFriendlyMessage = "";
     public static String localeMessage = "";
+    public static String defaultLanguage = "en_US";
+    public static String defaultCode = "ml_code_5000";
 
     private ErrorCode(Integer statusCode, Integer httpResponseCode, String defaultMessage) {
         this.statusCode = statusCode;
@@ -93,44 +95,45 @@ public enum ErrorCode {
                 System.out.println("Exception in getting locale error message.");
                 System.out.println("errorMessageJsonObject in catch:" + errorMessageJsonObject);
 
-                return "{" +   "\"errorInformation\": {" +
+                return "{" + "\"errorInformation\": {" +
                         "\"statusCode\": " + ErrorCode.GENERIC_DOWNSTREAM_ERROR_PAYER.getStatusCode() + ", " +
                         "\"description\": \"" + ErrorCode.GENERIC_DOWNSTREAM_ERROR_PAYER.getDefaultMessage() + "\", " +
                         "\"descriptionLocale\": \"\"}}";
             }
         }
         String strStatusCode = statusCode;
-        String appendedStatusCode = "ml_code_"+statusCode;
-        System.out.println("appendedStatusCode: "+appendedStatusCode);
+        String appendedStatusCode = "ml_code_" + statusCode;
+        System.out.println("appendedStatusCode: " + appendedStatusCode);
 
-        if (errorMessageJsonObject.containsKey("en_US")) {
-            JSONObject enJsonObject = (JSONObject) errorMessageJsonObject.get("en_US");
+        if (errorMessageJsonObject.containsKey(defaultLanguage)) {
+            JSONObject enJsonObject = (JSONObject) errorMessageJsonObject.get(defaultLanguage);
             if (enJsonObject.containsKey(appendedStatusCode)) {
                 endUserFriendlyMessage = (String) enJsonObject.get(appendedStatusCode);
-            }
-            else {
+            } else {
                 strStatusCode = "5000";
-                endUserFriendlyMessage = (String) enJsonObject.get("ml_code_5000");
+                endUserFriendlyMessage = (String) enJsonObject.get(defaultCode);
             }
         }
 
-        if (errorMessageJsonObject.containsKey(locale)){
+        if (errorMessageJsonObject.containsKey(locale) && !locale.equals(null)) {
             JSONObject localeJsonObject = (JSONObject) errorMessageJsonObject.get(locale);
-            if (localeJsonObject.containsKey(appendedStatusCode)){
+            if (localeJsonObject.containsKey(appendedStatusCode)) {
                 localeMessage = (String) localeJsonObject.get(appendedStatusCode);
-                if (strStatusCode != statusCode){
+                if (strStatusCode != statusCode) {
                     strStatusCode = statusCode;
                     endUserFriendlyMessage = "";
                 }
-            }
-            else {
-                if (strStatusCode != statusCode)
-                {
-                    localeMessage = (String) localeJsonObject.get("ml_code_5000");
+            } else {
+                if (strStatusCode != statusCode) {
+                    localeMessage = (String) localeJsonObject.get(defaultCode);
+                } else {
+                    localeMessage = endUserFriendlyMessage;
                 }
             }
+        } else {
+            localeMessage = endUserFriendlyMessage;
         }
-        return "{" +   "\"errorInformation\": {" +
+        return "{" + "\"errorInformation\": {" +
                 "\"statusCode\": " + strStatusCode + ", " +
                 "\"description\": \"" + endUserFriendlyMessage + "\", " +
                 "\"descriptionLocale\": \"" + localeMessage + "\"}}";
