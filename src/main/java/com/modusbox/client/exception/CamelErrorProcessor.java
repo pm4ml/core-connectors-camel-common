@@ -98,6 +98,9 @@ public class CamelErrorProcessor implements Processor {
                 endUserFriendlyMessage = errorInformation.getString("description");
                 localeMessage = errorInformation.getString("descriptionLocale");
 
+                if (!errorInformation.getString("statusCode").equals(statusCode)){
+                    statusCode = errorInformation.getString("statusCode");
+                }
                 reasonText = "{" +
                         "\"statusCode\": \"" + statusCode + "\"," +
                         "\"message\": \"" + endUserFriendlyMessage + "\"," +
