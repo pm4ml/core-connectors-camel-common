@@ -97,9 +97,10 @@ public class CamelErrorProcessor implements Processor {
                 errorInformation = new JSONObject(jsonObjectMessage).getJSONObject("errorInformation");
                 endUserFriendlyMessage = errorInformation.getString("description");
                 localeMessage = errorInformation.getString("descriptionLocale");
+                String statusCodeInJson = String.valueOf(errorInformation.getInt("statusCode"));
 
-                if (!errorInformation.getString("statusCode").equals(statusCode)){
-                    statusCode = errorInformation.getString("statusCode");
+                if (!(statusCodeInJson.equals(statusCode))){
+                    statusCode = statusCodeInJson;
                 }
                 reasonText = "{" +
                         "\"statusCode\": \"" + statusCode + "\"," +
