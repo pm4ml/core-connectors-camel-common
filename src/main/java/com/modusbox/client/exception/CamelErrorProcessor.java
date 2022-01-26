@@ -1,5 +1,6 @@
 package com.modusbox.client.exception;
 
+import com.modusbox.client.enums.ErrorCode;
 import com.modusbox.log4j2.message.CustomJsonMessage;
 import com.modusbox.log4j2.message.CustomJsonMessageImpl;
 import org.apache.camel.Exchange;
@@ -7,6 +8,7 @@ import org.apache.camel.Processor;
 import org.apache.camel.RuntimeExpressionException;
 import org.apache.camel.component.bean.validator.BeanValidationException;
 import org.apache.camel.support.processor.validation.SchemaValidationException;
+import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
 import java.net.SocketTimeoutException;
@@ -21,10 +23,21 @@ public class CamelErrorProcessor implements Processor {
 
         boolean errorHandled = true;
         String reasonText = "{ \"statusCode\": \"2001\"," +
-                                "\"message\": \"Unknown\" }";
+                "\"message\": \"Unknown\"," +
+                "\"localeMessage\": \"Unknown\"," +
+                "\"detailedDescription\": \"Unknown\" }";
         int httpResponseCode = 500;
         String conflictReason = "";
 
+        String statusCode = "2001";
+        String locale = (String) exchange.getProperty("locale");
+        System.out.println("Locale in CamelProcessor: " + locale);
+
+        String jsonObjectMessage ;
+        JSONObject errorInformation;
+        String endUserFriendlyMessage = "";
+        String localeMessage = "" ;
+        String detailedDescription = "";
         // The exception may be in 1 of 2 places
         Exception exception = exchange.getException();
         if (exception == null) {
@@ -36,20 +49,24 @@ public class CamelErrorProcessor implements Processor {
             if (exception instanceof BeanValidationException) {
                 // Bad Request
                 httpResponseCode = 400;
-                reasonText = "{ \"statusCode\": \"3100\"," +
+                detailedDescription = "{ \"statusCode\": \"3100\"," +
                                 "\"message\": \"Bad Request\" }";
+                statusCode = "3100";
             } else if (exception instanceof SocketTimeoutException) {
                 httpResponseCode = 408;
-                reasonText = " { \"statusCode\": \"1001\"," +
+                detailedDescription = " { \"statusCode\": \"2004\"," +
                                 "\"message\": \"Time Out\" }";
+                statusCode = "2004";
             } else if (exception instanceof SchemaValidationException) {
                 SchemaValidationException e = (SchemaValidationException) exception;
-                reasonText = " { \"statusCode\": \"3100\"," +
+                detailedDescription = " { \"statusCode\": \"3100\"," +
                                 "\"message\": \"" + e.getErrors().get(0).getMessage() + "\"}";
+                statusCode = "3100";
             } else if (exception instanceof IllegalArgumentException) {
                 IllegalArgumentException e = (IllegalArgumentException) exception;
                 if (e.getMessage().contains("Problem executing map")) {
-                    reasonText = " { \"statusCode\": \"2001\"," +
+                    statusCode = "2001";
+                    detailedDescription = " { \"statusCode\": \"2001\"," +
                                     "\"message\": \"Datasonnet mapping failed:" + e.getMessage()
                                                                                     .replace("\n", "\\n")
                                                                                     .replace("\r", "\\r")
@@ -58,7 +75,8 @@ public class CamelErrorProcessor implements Processor {
                 }
             } else if (exception instanceof RuntimeExpressionException) {
                 RuntimeExpressionException e = (RuntimeExpressionException) exception;
-                reasonText = " { \"statusCode\": \"2001\"," +
+                statusCode = "2001";
+                detailedDescription = " { \"statusCode\": \"2001\"," +
                                 "\"message\": \"Datasonnet mapping failed:" + e.getCause().getMessage()
                                                                                 .replace("\n", "\\n")
                                                                                 .replace("\r", "\\r")
@@ -75,6 +93,19 @@ public class CamelErrorProcessor implements Processor {
                 customJsonMessage.logJsonMessage("error", String.valueOf(exchange.getIn().getHeader("X-CorrelationId")),
                                                     "Processing the exception at CamelErrorProcessor", null, null,
                                                         exception.getMessage());
+                jsonObjectMessage = ErrorCode.getMojaloopErrorResponseByStatusCode(statusCode, locale);
+                errorInformation = new JSONObject(jsonObjectMessage).getJSONObject("errorInformation");
+                endUserFriendlyMessage = errorInformation.getString("description");
+                localeMessage = errorInformation.getString("descriptionLocale");
+
+                if (!errorInformation.getString("statusCode").equals(statusCode)){
+                    statusCode = errorInformation.getString("statusCode");
+                }
+                reasonText = "{" +
+                        "\"statusCode\": \"" + statusCode + "\"," +
+                        "\"message\": \"" + endUserFriendlyMessage + "\"," +
+                        "\"localeMessage\": \"" + localeMessage + "\"," +
+                        "\"detailedDescription\": " + detailedDescription + "}";
             }
         }
 
