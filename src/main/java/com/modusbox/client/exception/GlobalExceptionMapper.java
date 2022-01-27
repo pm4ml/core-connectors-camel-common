@@ -23,7 +23,9 @@ public class GlobalExceptionMapper implements ExceptionMapper<Exception> {
                 .header("Conflict-Reason", exception.getMessage())
                 .header("Content-Type", "application/json")
                 .entity("{ \"statusCode\": \"3100\"," +
-                        "\"message\": \"Bad Request\" }")
+                        "\"message\": \"Bad Request\","+
+                        "\"localeMessage\": \"Unknown\"," +
+                        "\"detailedDescription\": \"Unknown\" }")
                 .build();
     }
 
