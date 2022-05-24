@@ -32,7 +32,8 @@ public enum ErrorCode {
     GENERIC_DOWNSTREAM_ERROR_PAYER(4000, 500, "Generic error related to the Payer or Payer FSP."),
     GENERIC_DOWNSTREAM_ERROR_PAYEE(5000, 500, "Generic error due to the Payer or Payer FSP."),    
     PAYEE_LIMIT_ERROR(5200, 500, "Generic limit error."),
-    ROUNDING_VALUE_ERROR(5241, 500, "Amount is invalid. Please enter the amount that is divisible by XXXX.");
+    ROUNDING_VALUE_ERROR(5241, 500, "Amount is invalid. Please enter the amount that is divisible by XXXX."),
+    PAYMENT_TYPE_NOT_FOUND(5512, 404, "Payment Type is not found.");
 
     private final Integer statusCode;
     private final Integer httpResponseCode;

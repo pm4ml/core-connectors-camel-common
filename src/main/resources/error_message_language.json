@@ -3,7 +3,7 @@
     "en_US": {
       "ml_code_3200": "Account does not exist.",
       "ml_code_3242": "Account is not active.",
-      "ml_code_3202": "Payment Type is wrong.Please contact MFI.",
+      "ml_code_3202": "Please try again later. If you still cannot make the payment, please contact your service provider.",
       "ml_code_5200": "Payment is not successful. Your amount is either over or under the limit.",
       "ml_code_3101": "Please fill out the complete and correct information",
       "ml_code_3102": "Please fill out the complete and correct information.",
@@ -16,12 +16,14 @@
       "ml_code_5000": "Please try again later. If you still cannot make the payment, please contact your service provider.",
       "ml_code_4001": "Your service provider is not available for this service now. Please contact your service provider.",
       "ml_code_3204": "Payment is not successful. Please contact your service provider.",
-      "ml_code_3241": "Account does not match with phone number. Please contact MFI for updating your information."
+      "ml_code_3241": "Account does not match with phone number. Please contact MFI for updating your information.",
+      "ml_code_5512": "Payment Type is wrong. Please contact MFI.",
+      "ml_code_3201": "Please try again later. If you still cannot make the payment, please contact your service provider."
     },
     "my": {
       "ml_code_3200": "သင် ပေးချေလိုသော စာရင်း မရှိပါ။",
       "ml_code_3242": "သင် ပေးချေလိုသော စာရင်းမှာ အသုံးမပြုနိုင်တော့ပါ။",
-      "ml_code_3202": "ငွေပေးချေမှုပုံစံ မှားယွင်းနေပါသည်။ ကျေးဇူးပြု၍ သက်ဆိုင်ရာအသေးစား ချေးငွေလုပ်ငန်းသို့ ဆက်သွယ်ပါ။",
+      "ml_code_3202": "ကျေးဇူးပြု၍ နောက်တစ်ကြိမ် ထပ်မံကြိုးစားပါ။ ငွေပေးချေမှုပြုလုပ်၍ မရသေးပါက သက်ဆိုင်ရာ ဝန်ဆောင်မှုဌာနသို့ ဆက်သွယ်ပါ။",
       "ml_code_5200": "ငွေပေးချေမှု မအောင်မြင်ပါ။ သင် ပေးချေသော ငွေပမာဏမှာ အကန့်အသတ်ထက် ကျော်လွန်နေခြင်း သို့မဟုတ် လျော့နည်းနေခြင်း ဖြစ်သည်။",
       "ml_code_3101": "ကျေးဇူးပြု၍ ပြည့်စုံမှန်ကန်သော  အချက်အလက်များကို ဖြည့်စွက်ပါ။",
       "ml_code_3102": "ကျေးဇူးပြု၍ ပြည့်စုံမှန်ကန်သော  အချက်အလက်များကို ဖြည့်စွက်ပါ။",
@@ -34,7 +36,9 @@
       "ml_code_5000": "ကျေးဇူးပြု၍ နောက်တစ်ကြိမ် ထပ်မံကြိုးစားပါ။ ငွေပေးချေမှုပြုလုပ်၍ မရသေးပါက သက်ဆိုင်ရာ ဝန်ဆောင်မှုဌာနသို့ ဆက်သွယ်ပါ။",
       "ml_code_4001": "သက်ဆိုင်ရာ ဝန်ဆောင်မှုဌာန မှ ဤဝန်ဆောင်မှုအတွက် ယခုမရနိုင်သေးပါ။ ကျေးဇူးပြု၍ သက်ဆိုင်ရာ ဝန်ဆောင်မှုဌာနသို့ဆက်သွယ်ပါ။",
       "ml_code_3204": "ငွေပေးချေမှု မအောင်မြင်ပါ။ ကျေးဇူးပြု၍ သက်ဆိုင်ရာ ဝန်ဆောင်မှုဌာနသို့ဆက်သွယ်ပါ။",
-      "ml_code_3241": "စာရင်းနှင့် ဖုန်းနံပါတ်မှာ ကိုက်ညီမှု မရှိပါ။ ကျေးဇူးပြု၍ သင်၏ အချက်အလက်များကို ပြင်ဆင်ပေးရန်အတွက် သက်ဆိုင်ရာအသေးစား ချေးငွေလုပ်ငန်းသို့ ဆက်သွယ်ပါ။"
+      "ml_code_3241": "စာရင်းနှင့် ဖုန်းနံပါတ်မှာ ကိုက်ညီမှု မရှိပါ။ ကျေးဇူးပြု၍ သင်၏ အချက်အလက်များကို ပြင်ဆင်ပေးရန်အတွက် သက်ဆိုင်ရာအသေးစား ချေးငွေလုပ်ငန်းသို့ ဆက်သွယ်ပါ။",
+      "ml_code_5512": "ငွေပေးချေမှုပုံစံ မှားယွင်းနေပါသည်။ ကျေးဇူးပြု၍ သက်ဆိုင်ရာအသေးစား ချေးငွေလုပ်ငန်းသို့ ဆက်သွယ်ပါ။",
+      "ml_code_3201": "ကျေးဇူးပြု၍ နောက်တစ်ကြိမ် ထပ်မံကြိုးစားပါ။ ငွေပေးချေမှုပြုလုပ်၍ မရသေးပါက သက်ဆိုင်ရာ ဝန်ဆောင်မှုဌာနသို့ ဆက်သွယ်ပါ။"
     }
   }
 }
