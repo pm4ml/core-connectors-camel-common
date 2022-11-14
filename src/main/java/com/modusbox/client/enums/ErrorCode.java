@@ -32,7 +32,7 @@ public enum ErrorCode {
     GENERIC_DOWNSTREAM_ERROR_PAYER(4000, 500, "Generic error related to the Payer or Payer FSP."),
     GENERIC_DOWNSTREAM_ERROR_PAYEE(5000, 500, "Generic error due to the Payer or Payer FSP."),    
     PAYEE_LIMIT_ERROR(5200, 500, "Generic limit error."),
-    ROUNDING_VALUE_ERROR(5241, 500, "Amount is invalid. Please enter the amount that is divisible by XXXX."),
+    ROUNDING_VALUE_ERROR(5241, 500, "Amount is invalid. Please enter the format specified by the service provider."),
     ADD_PARTY_INFORMATION_ERROR(3003, 500, "Error occurred while adding or updating information regarding a Party."),
     MISSING_MANDATORY_SYNTAX(3103, 400, "Mandatory element in the data model was missing."),
     TOO_MANY_ELEMENT(3104, 400, "Number of elements of an array exceeds the maximum number allowed."),
