@@ -1,5 +1,7 @@
 package com.modusbox.client.utils;
 
+import java.math.BigDecimal;
+
 public class Utility {
 
     public static boolean isPhoneNumberMatch(String walletPhoneNumber, String mfiPhoneNumber) {
@@ -21,5 +23,15 @@ public class Utility {
             number = "0" + number;
         }
         return number;
+    }
+
+    public static String stripTrailingZerosAfterDecimalPoint(String strNumber)
+    {
+        String resultNumber = strNumber;
+        if(strNumber != null) {
+            BigDecimal stripedVal = new BigDecimal(strNumber).stripTrailingZeros();
+            resultNumber = stripedVal.toPlainString();
+        }
+        return resultNumber;
     }
 }
