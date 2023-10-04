@@ -1,6 +1,10 @@
 package com.modusbox.client.utils;
 
+import com.modusbox.client.enums.ErrorCode;
+
 import java.math.BigDecimal;
+
+import static com.modusbox.client.enums.ErrorCode.*;
 
 public class Utility {
 
@@ -25,13 +29,25 @@ public class Utility {
         return number;
     }
 
-    public static String stripTrailingZerosAfterDecimalPoint(String strNumber)
-    {
+    public static String stripTrailingZerosAfterDecimalPoint(String strNumber) throws Exception {
         String resultNumber = strNumber;
-        if(strNumber != null) {
-            BigDecimal stripedVal = new BigDecimal(strNumber).stripTrailingZeros();
-            resultNumber = stripedVal.toPlainString();
-        }
-        return resultNumber;
+            if (strNumber != null) {
+                BigDecimal stripedVal = new BigDecimal(strNumber).stripTrailingZeros();
+                resultNumber = stripedVal.toPlainString();
+            }
+            if( resultNumber != null && resultNumber.equals("") && getDecimalCount(resultNumber) > 4)
+            {
+                throw new Exception(ROUNDING_VALUE_ERROR.getDefaultMessage());
+            }
+            return resultNumber;
+    }
+
+    public static int getDecimalCount(String num)
+    {
+        String str = num;
+        //Find the index of the decimal
+        int index = str.indexOf(".");
+        //Return the index subtracted from the length of the string
+        return str.length() - index - 1;
     }
 }
